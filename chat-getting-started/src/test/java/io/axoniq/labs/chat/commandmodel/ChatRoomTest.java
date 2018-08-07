@@ -35,6 +35,15 @@ public class ChatRoomTest {
     }
 
     @Test
+    public void testPostMessageMultipleRooms() throws Exception {
+        testFixture.given(new RoomCreatedEvent("roomId", "testroom"),
+                new RoomCreatedEvent("roomId2", "testroom2"),
+                new ParticipantJoinedRoomEvent("participant", "roomId"))
+                .when(new PostMessageCommand("participant", "roomId", "Hi there!"))
+                .expectEvents(new MessagePostedEvent("participant", "roomId", "Hi there!"));
+    }
+
+    @Test
     public void testCannotJoinChatRoomTwice() throws Exception {
         testFixture.given(new RoomCreatedEvent("roomId", "testroom"),
                           new ParticipantJoinedRoomEvent("participant", "roomId"))
