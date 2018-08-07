@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rooms")
+//comment
 public class RoomSummaryProjection {
 
     private final RoomSummaryRepository roomSummaryRepository;
